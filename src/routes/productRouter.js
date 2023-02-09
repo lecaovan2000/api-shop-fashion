@@ -35,7 +35,7 @@ router.post("/create", upload.array("img_avatar"), async (req, res) => {
       message: "Vui long upload file !",
     });
   }
-  if (req.files.length > 0 || req.files.length == 2) {
+  if (req.files.length > 0 && req.files.length > 2) {
     return res.json({
       error_code: 400,
       message: "Maximum 2 file !",
@@ -71,6 +71,38 @@ router.post("/create", upload.array("img_avatar"), async (req, res) => {
       data: [],
     });
   }
+});
+
+router.post("/update", (req, res) => {
+  console.log("data update", req.body.title);
+  // try {
+  //   const product = await productModal.findByIdAndUpdate(
+  //     req.params.id,
+  //     req.body,
+
+  //     {
+  //       new: false,
+  //     }
+  //   );
+  //   if (!product) {
+  //     return res.json({
+  //       error_code: 404,
+  //       message: "Product not found",
+  //       data: [],
+  //     });
+  //   }
+  //   res.json({
+  //     error_code: 200,
+  //     message: "Success",
+  //     data: product,
+  //   });
+  // } catch (err) {
+  //   res.json({
+  //     error_code: 500,
+  //     message: "Server error",
+  //     data: [],
+  //   });
+  // }
 });
 
 module.exports = router;
