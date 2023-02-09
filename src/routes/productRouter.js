@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const upload = require("./upload");
 const productModal = require("../app/modules/Product");
-const path = require("path");
 
 router.post("/create", upload.array("img_avatar"), async (req, res) => {
   const title = req.body.title;
