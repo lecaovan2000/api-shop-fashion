@@ -1,23 +1,20 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const connectDb = require("./config/db");
 const path = require("path");
-const db = require("./config/db");
-const Product = require("./app/modules/Product");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
-db.connect();
+const productRouter = require("./routes/productRouter");
 
-const morgan = require("morgan");
+connectDb.connect();
 
-app.use(morgan("combined"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
 
-app.get("/", (req, res) => {
-  Product.find({}, (err, product) => {
-    if (!err) {
-      res.json(product);
-    } else {
-      res.status(400).json({ error: "looi" });
-    }
-  });
-});
-app.listen(port, () => console.log("Server da duoc tao"));
+app.use("/images/", express.static("src/imgUploads"));
+
+app.use("/api/v1/product/", productRouter);
+
+app.listen(3000, () => console.log("Server started on port 3000"));
