@@ -6,9 +6,16 @@ const ProductSchema = new mongoose.Schema({
   categorySlug: { type: String },
   colors: { type: Array },
   img_avatar: {
-    type: Array,
+    image01: {
+      type: String,
+      required: true,
+    },
+    image02: {
+      type: String,
+      required: true,
+    },
   },
-  slug: { type: Array },
+  slug: { type: String },
   size: { type: Array },
   description: { type: String },
   createdAt: { type: Date, default: Date.now },
