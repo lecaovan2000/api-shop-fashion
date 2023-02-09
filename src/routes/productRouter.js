@@ -3,6 +3,23 @@ const router = express.Router();
 const upload = require("./upload");
 const productModal = require("../app/modules/Product");
 
+router.get("/get_all", async (req, res, next) => {
+  try {
+    const getProduct = await productModal.find({});
+    res.json({
+      error_code: 200,
+      message: "Success",
+      data: getProduct,
+    });
+  } catch (error) {
+    res.json({
+      error_code: 400,
+      message: "Server error",
+      data: [],
+    });
+  }
+});
+
 router.post("/create", upload.array("img_avatar"), async (req, res) => {
   const title = req.body.title;
   const price = req.body.price;
