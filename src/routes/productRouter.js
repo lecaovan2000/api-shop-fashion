@@ -3,7 +3,7 @@ const router = express.Router();
 const upload = require("./upload");
 const productModal = require("../app/modules/Product");
 
-router.get("/get_all", async (req, res, next) => {
+router.get("/get_all", upload.array("img_avatar"), async (req, res, next) => {
   try {
     const getProduct = await productModal.find({});
     res.json({
@@ -20,7 +20,7 @@ router.get("/get_all", async (req, res, next) => {
   }
 });
 
-router.post("/create", upload.array("img_avatar"), async (req, res) => {
+router.post("/create", async (req, res) => {
   const title = req.body.title;
   const price = req.body.price;
   const categorySlug = req.body.categorySlug;

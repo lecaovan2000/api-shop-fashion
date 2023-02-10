@@ -17,4 +17,4 @@ app.use("/images", express.static("src/imgUploads"));
 
 app.use("/api/v1/product", productRouter);
 
-app.listen(3000, () => console.log("Server started on port 3000"));
+app.listen(8000, () => console.log("Server started on port 3000"));
